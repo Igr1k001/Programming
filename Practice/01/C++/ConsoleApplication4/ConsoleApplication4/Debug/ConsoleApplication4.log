@@ -1,0 +1,3 @@
+﻿  ConsoleApplication4.cpp
+C:\Игорь\Visusl studio\ConsoleApplication4\ConsoleApplication4\ConsoleApplication4.cpp(19,6): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+  ConsoleApplication4.vcxproj -> C:\Игорь\Visusl studio\ConsoleApplication4\Debug\ConsoleApplication4.exe
