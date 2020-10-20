@@ -7,7 +7,7 @@ int main()
 { 
     setlocale(LC_ALL,"Russian") ;
 
-    cout << "Результат выражения 2+2*2=" + to_string(2 + 2 * 2);
+    cout << "Результат выражения 2+2*2 = " + to_string(2 + 2 * 2);
 }
 
 
