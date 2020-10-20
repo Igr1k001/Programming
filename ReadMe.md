@@ -11,3 +11,4 @@
 | Практическая 3 - [[C++]](./Practice/03/C++/ConsoleApplication3/ConsoleApplication3/ConsoleApplication3.cpp) [[Python]](./Practice/03/Python/PythonApplication3PY/PythonApplication3PY/PythonApplication3PY.py) 
 | Практическая 4 - [[C++]](./Practice/04/C++/ConsoleApplication4/ConsoleApplication4/ConsoleApplication4.cpp) [[Python]](./Practice/04/Python/PythonApplication4PY/PythonApplication4PY/PythonApplication4PY.py) 
 | Практическая 5 - [[C++]](./Practice/05/C++/ConsoleApplication5/ConsoleApplication5/ConsoleApplication5.cpp) [[Python]](./Practice/05/Python/PythonApplication5PY/PythonApplication5PY/PythonApplication5PY.py) 
+| Практическая 6 - [[C++]](./Practice/06/C++/ConsoleApplication6/ConsoleApplication6/ConsoleApplication6.cpp) 
