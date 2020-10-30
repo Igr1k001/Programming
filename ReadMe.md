@@ -13,9 +13,8 @@
 | Практическая 5 - [[C++]](./Practice/05/C++/ConsoleApplication5/ConsoleApplication5/ConsoleApplication5.cpp) [[Python]](./Practice/05/Python/PythonApplication5PY/PythonApplication5PY/PythonApplication5PY.py) 
 | Практическая 6 - [[C++]](./Practice/06/C++/06 C++/06 C++/06 C++.cpp) [[Python]](./Practice/06/Python/06 PY/06 PY/_06_PY.py)
 | Практическая 7 - [[C++]](./Practice/07/C++/07 C++/07 C++/07 C++.cpp) [[Python]](./Practice/07/Python/07 PY/07 PY/_07_PY.py)
+| Практическая 5 - [[C++]](./Practice/05/C++/ConsoleApplication5/ConsoleApplication5/ConsoleApplication5.cpp) [[Python]](./Practice/05/Python/PythonApplication5PY/PythonApplication5PY/PythonApplication5PY.py) 
 
 
 
 
-
-/Practice/06/C++/06 C++/06 C++/06 C++.cpp
