@@ -1,3 +1,0 @@
-﻿  ConsoleApplication2.cpp
-C:\Users\innap\source\repos\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.cpp(8,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-  ConsoleApplication2.vcxproj -> C:\Users\innap\source\repos\ConsoleApplication2\Debug\ConsoleApplication2.exe
