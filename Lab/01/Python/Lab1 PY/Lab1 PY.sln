@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Lab1 PY", "Lab1 PY\Lab1 PY.pyproj", "{9BB8A27E-4BB3-4B51-A849-CBA44611F01B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BB8A27E-4BB3-4B51-A849-CBA44611F01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB8A27E-4BB3-4B51-A849-CBA44611F01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25BA8887-2D20-4865-9F99-D9B411169233}
+	EndGlobalSection
+EndGlobal
