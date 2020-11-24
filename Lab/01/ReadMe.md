@@ -120,7 +120,6 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 		std::cout << "Start server... OK\n";
 		svr.listen("localhost", 3000); // Запускаем сервер на localhost и порту 1234
 	}
-
 Исходный код клиента:
 
 	from tkinter import *
