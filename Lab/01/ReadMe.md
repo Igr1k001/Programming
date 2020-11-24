@@ -171,8 +171,7 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 	root.mainloop()
 
 Скриншот клиента:
-
-![](.C:\Users\innap\source\Lab.PNG)
+![](.C:\Users\innap\source\Lab.png)
 
 Заключение:
 Цель работы была успешно достигнута. Было выполнено:
