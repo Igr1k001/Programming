@@ -170,10 +170,6 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 
 	root.mainloop()
 
-Скриншот клиента:
-
-![](https://disk.yandex.ru/client/disk?idApp=client&dialog=slider&idDialog=%2Fdisk%2FLab.PNG) 
-
 Заключение:
 Цель работы была успешно достигнута. Было выполнено:
 
