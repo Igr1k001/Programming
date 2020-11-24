@@ -172,7 +172,7 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 
 Скриншот клиента:
 
-![](.C:/Users/innap/source/Lab.png) ![](./image/pic1.png)
+![](.C:/Users/innap/source/Lab.PNG) 
 
 Заключение:
 Цель работы была успешно достигнута. Было выполнено:
