@@ -1,0 +1,6 @@
+{
+    "webhooks": [
+        "http://localhost:5000/",
+        "http://webhook.site/92447c23-c73b-428b-9708-9911777eabfe"
+    ]
+}
