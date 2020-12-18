@@ -55,4 +55,4 @@
 
 
 
-![](C:/Users/innap/Desktop/Games/Settings.jpg)
+![](/Desktop/Games/Settings.jpg)
