@@ -2,18 +2,10 @@ from flask import Flask, request, jsonify
 import openpyxl
 import json
 import datetime
-
-book = openpyxl.load_workbook('data.xlsx')
-sheet= book.active
-
-sheet['A1'] = 'N'
-sheet['B1'] = 'User ID'
-sheet['C1'] = 'Datetime'
-sheet['D1'] = 'Item'
-sheet['E1'] = 'Price'
+import os.path
 
 app = Flask(__name__)
- 
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -40,10 +32,7 @@ def index():
 
             buffer.append(item);
 
-        
-
-        #дальше проверяем сколько в буфере, если 1000 или больше - пишем в эксель
-        if len(buffer) > 1000:
+        if len(buffer) >= 1000:
             for product in buffer:
                 sheet[row][0].value = product['N']
                 sheet[row][1].value = product['userId']
@@ -55,18 +44,30 @@ def index():
             lastIndex = 1
             row = 2
             buffer.clear()
-        book.save('data.xlsx')
-        book.close()
+            book.save('data.xlsx')
         
-        print(buffer)
 
         return 'OK'
         #return jsonify(data)
  
 if __name__ == "__main__":
     global lastIndex, buffer
-    
     lastIndex = 1
-    buffer = [];
+    buffer = []
+
+    if not(os.path.exists('data.xlsx')):
+        book = openpyxl.Workbook()
+        sheet = book.active
+
+        sheet['A1'] = 'N'
+        sheet['B1'] = 'User ID'
+        sheet['C1'] = 'Datetime'
+        sheet['D1'] = 'Item'
+        sheet['E1'] = 'Price'
+
+        book.save('data.xlsx')
+    else:
+        book = openpyxl.load_workbook('data.xlsx')
+        sheet = book.active
 
     app.run()

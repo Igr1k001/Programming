@@ -51,7 +51,7 @@
 ## Выполнение работы
 Для начала  создаем навык на сраничке Яндекс.Диалоги. Данный навык будет уметь добавлять в виртульную корзину продукты с ценно, которые пользователь называет или записывает в диалоге с Алисой.
 
-![](https://github.com/Igr1k001/Programming/blob/master/Lab/02/image/Settings.jpg)
+![](./image/Settings.jpg)
 
 Рисунок 1. Скриншот со страницы "Настройки"
 
@@ -62,7 +62,7 @@
 Для получения цены я воспользовался функцией от Яндекс, которая сама может считывать цифры в тексте.
 Таким образом, команда "Что в корзине" показывает название и цену товара, добавленных в корзину.
 
-![](https://github.com/Igr1k001/Programming/blob/master/Lab/02/image/cart.jpg)
+![](./image/cart.jpg)
 
 Рисунок 2. Демонстрация команды "Что в корзине"
 
@@ -72,13 +72,13 @@
 
 Так же была создана кнопка "Помощь", которая демонстрирует пользователю функции данного навыка.
 
-![](https://github.com/Igr1k001/Programming/blob/master/Lab/02/image/cart.jpg)
+![](./image/cart.jpg)
 
 Рисунок 3. Комнда "Помощь"
 
 Веб-страница управления вебхуками генерируется просто. Для каждого вебхука из конфигурационного файла ссылка на вебхук заменяется в шаблоне для вебхука и добавляется в конец временной строки. После, этой временной строкой заменяется место, предназначенное для списка вебхуков.
 
-![](https://github.com/Igr1k001/Programming/blob/master/Lab/02/image/Webhooks.jpg)
+![](./image/Webhooks.jpg)
 
 Рисунок 4. Страничка с Вебхуками
 
@@ -650,18 +650,10 @@ from flask import Flask, request, jsonify
 import openpyxl
 import json
 import datetime
-
-book = openpyxl.load_workbook('data.xlsx')
-sheet= book.active
-
-sheet['A1'] = 'N'
-sheet['B1'] = 'User ID'
-sheet['C1'] = 'Datetime'
-sheet['D1'] = 'Item'
-sheet['E1'] = 'Price'
+import os.path
 
 app = Flask(__name__)
- 
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -688,10 +680,7 @@ def index():
 
             buffer.append(item);
 
-        
-
-        #дальше проверяем сколько в буфере, если 1000 или больше - пишем в эксель
-        if len(buffer) > 1000:
+        if len(buffer) >= 1000:
             for product in buffer:
                 sheet[row][0].value = product['N']
                 sheet[row][1].value = product['userId']
@@ -703,21 +692,34 @@ def index():
             lastIndex = 1
             row = 2
             buffer.clear()
-        book.save('data.xlsx')
-        book.close()
+            book.save('data.xlsx')
         
-        print(buffer)
 
         return 'OK'
         #return jsonify(data)
  
 if __name__ == "__main__":
     global lastIndex, buffer
-    
     lastIndex = 1
-    buffer = [];
+    buffer = []
+
+    if not(os.path.exists('data.xlsx')):
+        book = openpyxl.Workbook()
+        sheet = book.active
+
+        sheet['A1'] = 'N'
+        sheet['B1'] = 'User ID'
+        sheet['C1'] = 'Datetime'
+        sheet['D1'] = 'Item'
+        sheet['E1'] = 'Price'
+
+        book.save('data.xlsx')
+    else:
+        book = openpyxl.load_workbook('data.xlsx')
+        sheet = book.active
 
     app.run()
+
 ```
 ## Вывод
 В ходе выполнения лабораторной работы, я научился работать в системе навыков Яндекс. Научился работать с методом Webhooks. Научился записывать и считывать текст из файла Excel и усовершенствовал свои знания в написании кода на языках C++ и Python. 
