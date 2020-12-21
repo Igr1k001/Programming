@@ -170,6 +170,8 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 
 	root.mainloop()
 
+Вид клиента:
+![](./image/Lab.PNG)
 Заключение:
 Цель работы была успешно достигнута. Было выполнено:
 
