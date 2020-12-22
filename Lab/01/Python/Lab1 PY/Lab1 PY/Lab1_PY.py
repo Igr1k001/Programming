@@ -14,6 +14,7 @@ def updateWidget(event):
 
     desc.config(text=description)
     temp.config(text=str(temperature) + "°C")
+    print('Update comleted')
 
 root = Tk()
 root.title("Погода")
