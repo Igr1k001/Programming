@@ -42,7 +42,7 @@ https://api.openweathermap.org/data/2.5/onecall?lat=44.952116&lon=34.102411&unit
 http://worldtimeapi.org/api/timezone/Europe/Simferopol
 
 Код сервера:
-
+''' C++
 	#include <iostream>
 	#include <cpp_httplib/httplib.h>
 	#include <nlohmann/json.hpp>
@@ -120,8 +120,9 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 		std::cout << "Start server... OK\n";
 		svr.listen("localhost", 3000); // Запускаем сервер на localhost и порту 1234
 	}
+'''
 Исходный код клиента:
-
+''' Python
 	from tkinter import *
 	import requests
 	import json
@@ -169,7 +170,7 @@ http://worldtimeapi.org/api/timezone/Europe/Simferopol
 
 
 	root.mainloop()
-
+'''
 Вид клиента:
 
 ![](./image/Lab.PNG)
