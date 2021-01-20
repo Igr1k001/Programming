@@ -1,94 +1,188 @@
-﻿#include <iostream>
+﻿#include <map>
+#include <ostream>
 #include <vector>
-#include <map>
-#include <time.h>
-#include "bozo.hpp"
+
 struct Student {
-    std::map<std::string, int> exams;
-    std::string sName;
-    int sgroup;
-    Student(std::string Name, int group, int math, int phys, int hist, int prog) {
-        exams = { {"math", math},{"phys", phys},{"hist", hist},{"prog", prog} };
-        sName = Name;
-        sgroup = group;
-    }
-    friend
-        std::ostream& operator<< (std::ostream& print, const Student& student) {
-        auto namelen = std::max(int(student.sName.length()), 4);
-        auto del = std::string(namelen, '-');
-        print << "+-" << del << "-+-------+------+------+------+------+\n"
-            << "| Name" << std::string(namelen - 4, ' ')
-            << " | Group | Math | Phys | Hist | Prog |\n"
-            << "+-" << del << "-+-------+------+------+------+------+\n"
-            << "| " << student.sName << " |   " << student.sgroup
-            << "   |  " << student.exams.at("math")
-            << "   |  " << student.exams.at("phys")
-            << "   |  " << student.exams.at("hist")
-            << "   |  " << student.exams.at("prog") << "   |\n"
-            << "+-" << del << "-+-------+------+------+------+------+\n";
-        return print;
-    }
-    bool operator > (const Student& Deb) {
-        return sName > Deb.sName;
-    }
-    bool operator < (const Student& Deb) {
-        return sName < Deb.sName;
-    }
+   std::string name;
+   int group;
+   std::map<std::string, int> exams;
 };
-std::ostream& operator << (std::ostream& print, const std::vector<Student>& loxi) {
-    auto namelen = loxi.at(0).sName.length();
-    for (auto lox = loxi.begin() + 1; lox != loxi.end(); lox++) {
-        if (lox->sName.length() > namelen) {
-            namelen = lox->sName.length();
-        }
-    }
-    auto del = std::string(namelen, '-');
-    print << "+-" << del << "-+-------+------+------+------+------+\n"
-        << "| Name" << std::string(namelen - 4, ' ')
-        << " | Group | Math | Phys | Hist | Prog |\n"
-        << "+-" << del << "-+-------+------+------+------+------+\n";
-    for (auto student : loxi) {
-        print << "| " << student.sName << std::string(namelen - student.sName.length(), ' ') << " |   " << student.sgroup
-            << "   |  " << student.exams.at("math")
-            << "   |  " << student.exams.at("phys")
-            << "   |  " << student.exams.at("hist")
-            << "   |  " << student.exams.at("prog")
-            << "   |\n"
-            << "+-" << del << "-+-------+------+------+------+------+\n";
-    }
-    return print;
+
+std::string str_repeat(std::string string, size_t times) {
+   std::string res = "";
+   for (size_t i = 0; i < times; i++) {
+      res += string;
+   }
+   return res;
 }
-int main() {
-    std::srand(std::time(0));
-    std::vector<Student> students = {
-                                    Student("WhosJoe",      1, 5, 4, 4, 3),
-                                    Student("Mathue",       2, 4, 4, 3, 4),
-                                    Student("JoJo",         3, 5, 5, 5, 5),
-                                    Student("Damedane",     9, 1, 3, 1, 1),
-                                    Student("Oama",         3, 3, 3, 3, 3),
-                                    Student("Dameyo",       0, 4, 5, 4, 3),
-                                    Student("BTSgay",       6, 3, 4, 3, 5),
-                                    Student("Dame",         0, 3, 3, 3, 3),
-                                    Student("UWUUWU",       5, 4, 3, 3, 1),
-                                    Student("Dameyu",       4, 5, 2, 3, 3) };
-    std::vector<Student> dvoeshniki;
-    int kolvo = 0;
-    for (auto lox : students) {
-        for (auto exam : lox.exams) {
-            if (exam.second == 2) {
-                dvoeshniki.push_back(lox);
-                kolvo += 1;
-                break;
-            }
-        }
-    }
-    if (kolvo) {
-        int ktoto = std::rand() % kolvo;
-        std::cout << Bozosort(dvoeshniki);
-        std::cout << "Explusion\n";
-        std::cout << dvoeshniki[ktoto];
-    }
-    else {
-        cout << "Not found\n";
-    }
+
+std::string student_cell_hr(size_t width) {
+   std::string res;
+
+   res = "+-";
+   res += str_repeat("-", width);
+   res += "-";
+
+   return res;
 }
+
+std::string student_cell_content(size_t width, std::string content) {
+   std::string res;
+
+   res = "| ";
+   res += content;
+   res += str_repeat(" ", width - content.length());
+   res += " ";
+
+   return res;
+}
+
+std::string student_table(std::vector<Student> students) {
+   size_t width[6] = { 4, 5, 4, 4, 4, 4 };
+   std::string titles[6] = { "Name", "Group", "Math", "Phys", "Hist", "Prog" };
+
+   std::vector<std::string> table;
+
+   for (auto it = students.begin(); it != students.end(); it++) {
+      auto student = (*it);
+      size_t name_length = student.name.length();
+      if (width[0] < name_length) {
+         width[0] = name_length;
+      }
+   }
+
+   int i = 0;
+   table.push_back(""); 
+   table.push_back(""); 
+   std::string table_close = "";
+   for (auto& title : titles) {
+      auto hr = student_cell_hr(width[i]);
+      auto cont = student_cell_content(width[i], title);
+
+      table[0] += hr;
+      table_close += hr;
+      table[1] += cont;
+
+      i++;
+   }
+   table[0] += "+";
+   table[1] += "|";
+
+   i = 0;
+   for (auto& student : students) {
+      size_t i0 = 2 + i * 2, i1 = 3 + i * 2;
+      table.push_back("");
+      table.push_back("");
+
+      table[i0] += student_cell_hr(width[0]);
+      table[i1] += student_cell_content(width[0], student.name);
+
+      table[i0] += student_cell_hr(width[1]);
+      table[i1] += student_cell_content(width[1], std::to_string(student.group));
+
+      table[i0] += student_cell_hr(width[2]);
+      table[i1] += student_cell_content(width[2], std::to_string(student.exams["mathematics"]));
+
+      table[i0] += student_cell_hr(width[3]);
+      table[i1] += student_cell_content(width[3], std::to_string(student.exams["physics"]));
+
+      table[i0] += student_cell_hr(width[4]);
+      table[i1] += student_cell_content(width[4], std::to_string(student.exams["history"]));
+
+      table[i0] += student_cell_hr(width[5]);
+      table[i1] += student_cell_content(width[5], std::to_string(student.exams["programming"]));
+
+      table[i0] += "+";
+      table[i1] += "|";
+
+      i++;
+   }
+
+   table.push_back(table_close + "+");
+
+   std::string res = "";
+   for (auto& table_row : table) {
+      res += table_row + "\n";
+   }
+
+   return res;
+}
+
+std::ostream& operator << (std::ostream& o, Student student) {
+   std::vector<Student> students = { student };
+   return o << student_table(students);
+}
+
+bool operator > (Student a, Student b) {
+   return a.name > b.name;
+}
+bool operator < (Student a, Student b) {
+   return a.name < b.name;
+}
+
+std::ostream& operator << (std::ostream& o, std::vector<Student> students) {
+   return o << student_table(students);
+}
+
+std::vector<Student> students = {
+   {"Polivoda", 1, {
+      {"mathematics", 3},
+      {"physics", 3},
+      {"history", 3},
+      {"programming", 3}
+   }},
+   {"Glushenko", 3, {
+      {"mathematics", 4},
+      {"physics", 3},
+      {"history", 4},
+      {"programming", 4}
+   }},
+   {"Kaisin", 1, {
+      {"mathematics", 2},
+      {"physics", 4},
+      {"history", 5},
+      {"programming", 4}
+   }},
+   {"Karnadski", 3, {
+      {"mathematics", 5},
+      {"physics", 3},
+      {"history", 3},
+      {"programming", 3}
+   }},
+   {"Petrov", 1, {
+      {"mathematics", 4},
+      {"physics", 4},
+      {"history", 5},
+      {"programming", 4}
+   }},
+   {"Ovsannikov", 2, {
+      {"mathematics", 2},
+      {"physics", 2},
+      {"history", 4},
+      {"programming", 4}
+   }},
+   {"Ivanov", 4, {
+      {"mathematics", 3},
+      {"physics", 3},
+      {"history", 4},
+      {"programming", 3}
+   }},
+   {"Pogrebitski", 8, {
+      {"mathematics", 4},
+      {"physics", 4},
+      {"history", 3},
+      {"programming", 4}
+   }},
+   {"Demin", 1, {
+      {"mathematics", 2},
+      {"physics", 4},
+      {"history", 4},
+      {"programming", 4}
+   }},
+   {"kirilin", 9, {
+      {"mathematics", 2},
+      {"physics", 4},
+      {"history", 3},
+      {"programming", 5}
+   }},
+};
