@@ -1,9 +1,30 @@
 ﻿#include <iostream>
 #include <cpp_httplib/httplib.h>
 #include <nlohmann/json.hpp>
+#include <fstream>
+#include <string>
+
 using json = nlohmann::json;
 using namespace httplib;
 using namespace std;
+
+string read_html_from_disk() {
+	string path = "htmlFragment.html";
+
+	string html;
+	ifstream file;
+
+	file.open(path);
+	if (!file.is_open()) {
+		return "Ошибка чтения файла";
+	}
+
+	getline(file, html, '\0');
+
+	file.close();
+
+	return html;
+}
 
 int get_time() {
 	Client cli("http://worldtimeapi.org");
@@ -14,7 +35,6 @@ int get_time() {
 			return j["unixtime"];
 		}
 	}
-
 }
 
 json get_weather(int time) {
@@ -40,20 +60,42 @@ json get_weather(int time) {
 			}
 
 			return json::object();
-		} else {
+		}
+		else {
 			return json::object();
 		}
-	} else {
+	}
+	else {
 		return json::object();
 	}
 }
 
 // В этой функции формируем ответ сервера на запрос
 void gen_response(const Request& req, Response& res) {
-	// Команда set_content задаёт ответ сервера и тип ответа:
-	// Hello, World! - тело ответа
-	// text/plain - MIME тип ответа (в данном случае обычный текст)
-	res.set_content(to_string(get_time()), "text/plain");
+	int current_time = get_time();
+	json current_weather = get_weather(current_time);
+
+	string description = current_weather["weather"][0]["description"];
+	int temp = current_weather["temp"];
+	string icon = current_weather["weather"][0]["icon"];
+
+	string html = read_html_from_disk();
+
+	string descriptionPlaceholder = "{hourly[i].weather[0].description}";
+	size_t found = html.find(descriptionPlaceholder);
+	html.replace(found, descriptionPlaceholder.length(), description);
+
+	string iconPlaceholder = "{hourly[i].weather[0].icon}";
+	size_t found2 = html.find(iconPlaceholder);
+	html.replace(found2, iconPlaceholder.length(), icon);
+
+	string tempPlaceholder = "{hourly[i].temp}";
+	size_t found3 = html.find(tempPlaceholder);
+	html.replace(found3, tempPlaceholder.length(), to_string(temp));
+	size_t found4 = html.find(tempPlaceholder);
+	html.replace(found4, tempPlaceholder.length(), to_string(temp));
+	
+	res.set_content(html, "text/html");
 }
 
 void raw_response(const Request& req, Response& res) {
@@ -69,9 +111,9 @@ void raw_response(const Request& req, Response& res) {
 }
 
 int main() {
-	Server svr;                    // Создаём сервер (пока-что не запущен)
+	Server svr;                    // Создаём сервер
 	svr.Get("/", gen_response);    // Вызвать функцию gen_response если кто-то обратиться к корню "сайта"
 	svr.Get("/raw", raw_response);
 	std::cout << "Start server... OK\n";
-	svr.listen("localhost", 3000); // Запускаем сервер на localhost и порту 1234
+	svr.listen("localhost", 3000); // Запускаем сервер на localhost и порту 3000
 }
