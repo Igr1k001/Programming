@@ -45,7 +45,7 @@
 
 Вид приложения:
 
-<p ![](./images/application.PNG)</p>
+![](./images/application.PNG)
 
 <p align="center">Рисунок 1. Интерфейс приложения.</p>
 
