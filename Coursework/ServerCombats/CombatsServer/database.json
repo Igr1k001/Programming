@@ -1,0 +1,41 @@
+{
+    "battles": [],
+    "users": [
+        {
+            "login": "test",
+            "password": "1234"
+        },
+        {
+            "login": "test2",
+            "password": "1234"
+        },
+        {
+            "login": "test3",
+            "password": "1234"
+        },
+        {
+            "login": "test4",
+            "password": "1234"
+        },
+        {
+            "login": "themitri4",
+            "password": "12345678"
+        },
+        {
+            "login": "igor",
+            "password": "1234"
+        },
+        {
+            "login": "",
+            "password": ""
+        },
+        {
+            "login": "igr1k",
+            "password": "123123"
+        },
+        {
+            "login": "igr1k",
+            "password": "123123"
+        }
+    ]
+}
